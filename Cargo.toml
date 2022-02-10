@@ -1,0 +1,5 @@
+[package]
+name = "const-usb-hid"
+version = "0.1.0"
+edition = "2021"
+authors = ["Calvin Kosmatka <calvin.kosmatka@gmail.com>"]
