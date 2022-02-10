@@ -99,17 +99,14 @@ impl<const N: usize> HIDBuilder<N> {
     }
     const fn usage<const USAGE: Usage>(self) -> HIDBuilder<{ N + 1 + USAGE.size() }> {
         let mut new_bytes = extend::<{ N }, { N + 1 + USAGE.size() }>(self.hid_bytes);
-        if USAGE.size() == 2 {
-            new_bytes[N] = 0x0a;
-        } else {
-            new_bytes[N] = 0x09;
-        }
         let v = Usage::value::<USAGE>();
         match v.len() {
             1 => {
+                new_bytes[N] = 0x09;
                 new_bytes[N + 1] = v[0];
             }
             2 => {
+                new_bytes[N] = 0x0a;
                 new_bytes[N + 1] = v[0];
                 new_bytes[N + 2] = v[1];
             }
